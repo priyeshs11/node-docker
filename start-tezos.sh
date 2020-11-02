@@ -7,7 +7,9 @@ init_node() {
 	tezos-node config init "$@" \
 		--rpc-addr="[::]:$rpcport" \
 		--net-addr="[::]:$netport" \
-		--connections=50 \
+		--connections=$connections \
+		--network=$network \
+		--history-mode=archive \
 		--cors-origin='*' \
 		--cors-header 'Origin, X-Requested-With, Content-Type, Accept, Range'
 	cat /home/tezos/.tezos-node/config.json
@@ -39,5 +41,4 @@ s3_sync() {
 
 init_node
 s3_sync
-#/home/tezos/start-analytics.sh &
 start_node
